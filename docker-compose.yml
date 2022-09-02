@@ -51,6 +51,7 @@ services:
       placement:
         constraints:
           - node.role == manager
+      replicas: 0 # disabled; already running in lab stack
 
 volumes:
   minecraft-data:
