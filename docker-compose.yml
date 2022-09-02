@@ -19,6 +19,39 @@ services:
         constraints:
           - node.labels.arch == x86_64
 
+  minecraft-restart:
+    image: alpinelinux/docker-cli
+    entrypoint: "sh -c"
+    command:
+      # stop the running container, which will cause another to start
+      - "docker stop $$(docker ps --filter name=mc_minecraft* --quiet)"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition: none
+      replicas: 0 # none by default; created when cron hits
+      labels:
+        # restart daily at 6am to get latest MC version
+        - swarm.cronjob.enable=true
+        - swarm.cronjob.schedule=0 6 * * *
+
+  cron:
+    image: crazymax/swarm-cronjob:1.11.0
+    environment:
+      - TZ=America/New_York
+      - LOG_LEVEL=info
+      - LOG_JSON=false
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
 volumes:
   minecraft-data:
     driver: local
