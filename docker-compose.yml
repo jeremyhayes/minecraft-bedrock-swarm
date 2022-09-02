@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+
+  minecraft:
+    image: itzg/minecraft-bedrock-server
+    ports:
+      - target: 19132
+        published: 19132
+        protocol: udp
+        mode: host
+    environment:
+      - EULA=TRUE
+      - GAMEMODE=creative
