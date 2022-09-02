@@ -9,6 +9,16 @@ services:
         published: 19132
         protocol: udp
         mode: host
+    volumes:
+      - minecraft-data:/data
     environment:
       - EULA=TRUE
       - GAMEMODE=creative
+
+volumes:
+  minecraft-data:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/docker-data/apps/minecraft'
