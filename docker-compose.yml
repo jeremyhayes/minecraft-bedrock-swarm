@@ -9,6 +9,8 @@ services:
         published: 19132
         protocol: udp
         mode: host
+    networks:
+      - host
     volumes:
       - minecraft-data:/data
     environment:
@@ -78,6 +80,10 @@ services:
         constraints:
           - node.role == manager
       replicas: 0 # disabled; already running in lab stack
+
+networks:
+  host:
+    external: true
 
 volumes:
   minecraft-data:
