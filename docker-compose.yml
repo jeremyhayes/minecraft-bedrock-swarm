@@ -15,8 +15,8 @@ services:
       - minecraft-data:/data
     environment:
       # docker image properties
-      - EULA=TRUE       # accept the microsoft eula
-      - VERSION=LATEST  # stay on latest available version
+      - EULA=TRUE          # accept the microsoft eula
+      - VERSION=LATEST     # LATEST|PREVIOUS|major.minor|major.minor.patch.release
       # Minecraft server.properties parameters
       # https://minecraft.fandom.com/wiki/Server.properties#Bedrock_Edition_3
       - "SERVER_NAME=Family Server"
