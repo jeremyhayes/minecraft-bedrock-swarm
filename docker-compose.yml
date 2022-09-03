@@ -21,6 +21,7 @@ services:
       - "LEVEL_NAME=Mushroom Kingdom"
       - GAMEMODE=survival
       - DIFFICULTY=easy
+      - ONLINE_MODE=false
       #- ALLOW_CHEATS=false
       #- ALLOW_LIST=xxx
       #- DEFAULT_PLAYER_PERMISSION_LEVEL=member
@@ -28,7 +29,6 @@ services:
       #- LEVEL_TYPE=Default
       #- MAX_PLAYERS=10
       #- MAX_THREADS=8
-      #- ONLINE_MODE=true
       #- PLAYER_IDLE_TIMEOUT=30
       #- PLAYER_MOVEMENT_SCORE_THRESHOLD=20
       #- PLAYER_MOVEMENT_DISTANCE_THRESHOLD=0.3
