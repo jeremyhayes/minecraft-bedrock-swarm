@@ -52,7 +52,7 @@ services:
     entrypoint: "sh -c"
     command:
       # stop the running container, which will cause another to start
-      - "docker stop $$(docker ps --filter name=mc_minecraft* --quiet)"
+      - "docker stop $$(docker ps --filter name=mc_bedrock* --quiet)"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     deploy:
