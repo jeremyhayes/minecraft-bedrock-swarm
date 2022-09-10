@@ -14,7 +14,7 @@ docker service scale mc_bedrock=0
 for world_dir in $SERVER_DIR/worlds/*; do
   world_name=$(basename "$world_dir")
   target="$BACKUP_DIR/$world_name-$(date +$DATE_FMT).tar.gz"
-  echo "Backing up $world_name to $target..."
+  echo "Backing up '$world_name' to $target..."
   tar -cvpzf "$target" "$world_dir"
 done
 
