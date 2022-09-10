@@ -12,7 +12,7 @@ services:
     networks:
       - host
     volumes:
-      - minecraft-data:/data
+      - server-data:/data
     environment:
       # docker image properties
       - EULA=TRUE          # accept the microsoft eula
@@ -86,9 +86,9 @@ networks:
     external: true
 
 volumes:
-  minecraft-data:
+  server-data:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/docker-data/apps/minecraft'
+      device: '/opt/apps/minecraft/server'
