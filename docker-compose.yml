@@ -90,7 +90,7 @@ services:
       replicas: 0 # none by default; created when cron hits
       labels:
         # restart daily at 6am to get latest MC version
-        - swarm.cronjob.enable=true
+        - swarm.cronjob.enable=false
         - swarm.cronjob.schedule=0 6 * * *
 
   cron:
