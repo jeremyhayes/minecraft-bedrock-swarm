@@ -47,6 +47,31 @@ services:
         constraints:
           - node.labels.arch == x86_64
 
+  backup:
+    image: alpinelinux/docker-cli
+    entrypoint: "sh -c"
+    command:
+      - "./backup.sh"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - server-data:/opt/server
+      - backups-data:/opt/backups
+      - "./backup.sh:./backup.sh"
+    environment:
+      - SERVER_DIR=/opt/server
+      - BACKUP_DIR=/opt/backups
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition: none
+      replicas: 0 # none by default; created when cron hits
+      labels:
+        # backup and restart daily at 6am
+        - swarm.cronjob.enable=true
+        - swarm.cronjob.schedule=0 6 * * *
+
   update:
     image: alpinelinux/docker-cli
     entrypoint: "sh -c"
@@ -93,3 +118,9 @@ volumes:
       type: 'none'
       o: 'bind'
       device: '/opt/apps/minecraft/server'
+  backups-data:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/opt/apps/minecraft/backups'
