@@ -47,12 +47,13 @@ services:
         constraints:
           - node.labels.arch == x86_64
 
-  minecraft-restart:
+  update:
     image: alpinelinux/docker-cli
     entrypoint: "sh -c"
     command:
-      # stop the running container, which will cause another to start
-      - "docker stop $$(docker ps --filter name=mc_bedrock* --quiet)"
+      # force service update, which causes restart
+      # assumes this is deployed to a stack named "mc"
+      - "docker service update mc_bedrock --force"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     deploy:
