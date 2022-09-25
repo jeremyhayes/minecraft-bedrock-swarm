@@ -60,6 +60,7 @@ services:
     environment:
       - SERVER_DIR=/opt/server
       - BACKUP_DIR=/opt/backups
+      - SERVICE_NAME=mc_bedrock
     deploy:
       placement:
         constraints:
