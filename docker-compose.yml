@@ -42,6 +42,9 @@ services:
       #- TICK_DISTANCE=4
       #- VIEW_DISTANCE=32
       #- CORRECT_PLAYER_MOVEMENT=false
+    # stdin/tty allow running console commands on the running service container
+    stdin_open: true
+    tty: true
     deploy:
       placement:
         constraints:
