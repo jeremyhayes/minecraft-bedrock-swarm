@@ -19,6 +19,9 @@ for world_dir in $SERVER_DIR/worlds/*; do
   target="$BACKUP_DIR/$world_name-$(date +$DATE_FMT).tar.gz"
   echo "Backing up '$world_name' to $target..."
   tar -cvpzf "$target" "$world_dir"
+
+  echo "Cleaning up old versions of '$world_name'..."
+  find "$BACKUP_DIR" -name "$world_name-*.tar.gz" -type f -mtime +14 -print -delete
 done
 
 echo "Starting bedrock service..."
