@@ -96,12 +96,16 @@ services:
   update:
     image: alpinelinux/docker-cli
     entrypoint: "sh -c"
-    command:
+    command: |
+      '
       # force service update, which causes restart
-      # assumes this is deployed to a stack named "mc"
-      - "docker service update mc_bedrock --force"
+      docker service update $$SERVICE_NAME --force
+      '
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      # assumes this is deployed to a stack named "mc"
+      - SERVICE_NAME=mc_bedrock
     deploy:
       placement:
         constraints:
