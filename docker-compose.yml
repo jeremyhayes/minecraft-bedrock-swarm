@@ -58,21 +58,21 @@ services:
       DATE_FMT="%Y-%m-%d_%H-%M-%S"
 
       echo "Stopping bedrock service..."
-      docker service scale $$SERVICE_NAME=0
+      docker service scale $$SERVICE_NAME=0 > /dev/null
 
       for world_dir in /opt/server/worlds/*; do
         world_name=$$(basename "$$world_dir")
         now=$$(date +$$DATE_FMT)
         target="/opt/backups/$$world_name-$$now.tar.gz"
         echo "Backing up '$$world_name' to $$target..."
-        tar -cvpzf "$$target" -C "$$world_dir" .
+        tar -cpzf "$$target" -C "$$world_dir" .
 
         echo "Cleaning up old versions of '$$world_name'..."
         find /opt/backups -name "$$world_name-*.tar.gz" -type f -mtime +14 -print -delete
       done
 
       echo "Starting bedrock service..."
-      docker service scale $$SERVICE_NAME=1
+      docker service scale $$SERVICE_NAME=1 > /dev/null
       '
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
