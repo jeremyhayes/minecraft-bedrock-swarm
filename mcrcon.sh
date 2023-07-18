@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo $1 | socat EXEC:"docker attach $(docker ps --filter name=mc_bedrock* --quiet)",pty STDIN
+docker exec $(docker ps --filter name=mc_bedrock* --quiet) /usr/local/bin/send-command $1
