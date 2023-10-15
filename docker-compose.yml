@@ -48,7 +48,7 @@ services:
           - node.labels.arch == x86_64
 
   backup:
-    image: alpinelinux/docker-cli@sha256:221790aa8585cb9763432d5577c761a67565d16b6dea9b205f685424407c2367
+    image: alpinelinux/docker-cli@sha256:22f92c68b61b4115bb1e183f1c198e52b383d3b34d3b930dc66e01e6c0461d77
     entrypoint: "sh -c"
     command: |
       '
@@ -91,7 +91,7 @@ services:
         - swarm.cronjob.schedule=0 6 * * *
 
   update:
-    image: alpinelinux/docker-cli@sha256:221790aa8585cb9763432d5577c761a67565d16b6dea9b205f685424407c2367
+    image: alpinelinux/docker-cli@sha256:22f92c68b61b4115bb1e183f1c198e52b383d3b34d3b930dc66e01e6c0461d77
     entrypoint: "sh -c"
     command: |
       '
