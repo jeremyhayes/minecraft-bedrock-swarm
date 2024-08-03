@@ -45,7 +45,8 @@ services:
     deploy:
       placement:
         constraints:
-          - node.labels.arch == x86_64
+          - node.role == manager # for mapped data volume
+          - node.platform.arch == x86_64
 
   backup:
     image: alpinelinux/docker-cli@sha256:7bcbc98c45215272a1df57ac6bf5a7b7d69434c84f61d5be096e419f75817d40
