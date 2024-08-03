@@ -116,6 +116,34 @@ services:
         - swarm.cronjob.enable=false
         - swarm.cronjob.schedule=0 6 * * *
 
+  bigben:
+    image: alpinelinux/docker-cli@sha256:35a0be0ca02a66e2f9aa132a482bb9165a3d29cd56bfe08a4c5ac2790cd28a87
+    entrypoint: "sh -c"
+    command: |
+      '
+      send() {
+        echo "sending '$$1' ..."
+        docker exec $$(docker ps --filter name=mc_bedrock* --quiet) /usr/local/bin/send-command $$1
+      }
+
+      send "say tick"
+      send "say tock"
+      send "say $$(date)"
+      '
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition: none
+      replicas: 0 # none by default; created when cron hits
+      labels:
+        # every hour, on the hour
+        - swarm.cronjob.enable=true
+        - swarm.cronjob.schedule=0 * * * *
+
   cron:
     image: crazymax/swarm-cronjob:1.13.0
     environment:
