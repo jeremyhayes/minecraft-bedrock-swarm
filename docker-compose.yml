@@ -145,7 +145,7 @@ services:
         - swarm.cronjob.schedule=0 * * * *
 
   cron:
-    image: crazymax/swarm-cronjob:1.13.0
+    image: crazymax/swarm-cronjob:1.14.0
     environment:
       - TZ=America/New_York
       - LOG_LEVEL=info
