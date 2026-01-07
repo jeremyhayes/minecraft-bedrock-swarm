@@ -156,7 +156,7 @@ services:
       placement:
         constraints:
           - node.role == manager
-      replicas: 0 # disabled; already running in lab stack
+      replicas: 1
 
 networks:
   host:
