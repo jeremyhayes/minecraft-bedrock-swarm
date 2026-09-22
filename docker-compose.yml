@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   bedrock:
-    image: itzg/minecraft-bedrock-server:latest@sha256:ae2eff0d05045e33654781ca03bd32a7523bcbc6561be74fa2e8cc143e8586db
+    image: itzg/minecraft-bedrock-server:latest@sha256:6c57c92052de4cce6c1f354a7c287890c5d1501a6138d6c5310f02687014aec3
     ports:
       - target: 19132
         published: 19132
